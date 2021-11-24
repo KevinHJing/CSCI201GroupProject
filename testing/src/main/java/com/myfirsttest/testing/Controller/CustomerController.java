@@ -29,13 +29,18 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Customer>> getAllExpenses(){
+    public ResponseEntity<List<Customer>> getAllCustomers(){
         return ResponseEntity.ok(customerService.getAllCustomers());
     }
 
-    @GetMapping("/{firstName}")
-    public ResponseEntity<Customer> getCustomerByName(@PathVariable String firstName){
-        return ResponseEntity.ok(customerService.getCustomerByName(firstName));
+    @GetMapping("/{username}")
+    public ResponseEntity<Customer> getCustomerByUsername(@PathVariable String username){
+        return ResponseEntity.ok(customerService.getCustomerByName(username));
+    }
+
+    @GetMapping("/{password}")
+    public ResponseEntity<Customer> getCustomerByPassword(@PathVariable String password){
+        return ResponseEntity.ok(customerService.getCustomerByName(password));
     }
 
     @DeleteMapping("/{id}")

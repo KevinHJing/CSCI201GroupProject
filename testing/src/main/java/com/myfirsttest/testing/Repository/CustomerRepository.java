@@ -9,6 +9,10 @@ import java.util.Optional;
 
 @Repository
 public interface CustomerRepository extends MongoRepository<Customer, String> {
-    @Query("{'firstName': ?0}")
-    Optional<Customer> findByName(String name);
+    @Query("{'username': ?0}")
+    Optional<Customer> findByUsername(String username);
+
+    @Query("{'password': ?0}")
+    Optional<Customer> findByPassword(String password);
+
 }

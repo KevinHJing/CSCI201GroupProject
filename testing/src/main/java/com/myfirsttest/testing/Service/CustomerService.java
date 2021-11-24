@@ -23,8 +23,14 @@ public class CustomerService {
         Customer savedCustomer = customerRepository.findById(customer.getId())
                 .orElseThrow(() -> new RuntimeException(
                         String.format("Cannot Find Customer by ID %s", customer.getId())));
-        savedCustomer.setLastName(customer.getLastName());
-        savedCustomer.setFirstName(customer.getFirstName());
+        savedCustomer.setPassword(customer.getPassword());
+        savedCustomer.setUsername(customer.getUsername());
+        savedCustomer.setEmail(customer.getEmail());
+        savedCustomer.setFname(customer.getFname());
+        savedCustomer.setLname(customer.getLname());
+        savedCustomer.setAge(customer.getAge());
+        savedCustomer.setDriversLicense(customer.getDriversLicense());
+        savedCustomer.setLikedListings(customer.getLikedListings());
 
         customerRepository.save(savedCustomer);
     }
@@ -33,12 +39,19 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
-    public Customer getCustomerByName(String firstname){
-        return customerRepository.findByName(firstname).orElseThrow(() -> new RuntimeException(
-                String.format("Cannot Find Customer by ID %s", firstname)));
+    public Customer getCustomerByName(String username){
+        return customerRepository.findByUsername(username).orElseThrow(() -> new RuntimeException(
+                String.format("Cannot Find Customer by ID %s", username)));
+    }
+
+    public Customer getCustomerByPassword(String password){
+        return customerRepository.findByUsername(password).orElseThrow(() -> new RuntimeException(
+                String.format("Cannot Find Customer by ID %s", password)));
     }
 
     public void deleteCustomer(String id){
         customerRepository.deleteById(id);
     }
+
+
 }
