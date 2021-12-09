@@ -24,5 +24,46 @@
                 <a class="btn btn-link" (click)="goRegister()">Register</a>
             </div>
         </form>
+
+
+        <script src="https://apis.google.com/js/api:client.js"></script>
+        <script>
+        var googleUser = {};
+        var startApp = function() {
+            gapi.load('auth2', function(){
+                // Retrieve the singleton for the GoogleAuth library and set up the client.
+                auth2 = gapi.auth2.init({
+                client_id: '471370513437-9krbauaeisuqi39rgdpdli7jav0kah5r.apps.googleusercontent.com',
+                cookiepolicy: 'single_host_origin',
+                });
+                attachSignin(document.getElementById('googleButton'));
+            }); 
+        };
+        
+        function attachSignin(element) {
+            console.log(element.id);
+            auth2.attachClickHandler(element, {},
+                function(googleUser) {
+                    document.getElementById('name').innerText = "Signed in: " +
+                        googleUser.getBasicProfile().getName();
+                }, function(error) {
+                    alert(JSON.stringify(error, undefined, 2));
+                });
+        }
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId());
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail());
+        }
+        </script>
+        <div id="gSignInWrapper">
+            <div id="googleButton" class="customGPlusSignIn">
+                <button id="googleButton" class="googleButton"><img src=pngfind.com-google-icon-png-344426.png width=18px height=18px />   Sign in with Google</button>
+            </div>
+        </div>
+        <div id="name"></div>
+        <script>startApp();</script>
     </div>
 </div>
