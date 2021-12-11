@@ -13,6 +13,7 @@ export class AppComponent {
         private accountService: AccountService
         ) {
         this.accountService.user.subscribe(x => this.user = x);
+        localStorage.clear();
     }
 
     logout() {
@@ -20,5 +21,8 @@ export class AppComponent {
     }
     login(){
         this.router.navigate(['login']);
+    }
+    account(){
+        this.router.navigate(['account']);
     }
 }

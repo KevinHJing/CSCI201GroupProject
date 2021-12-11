@@ -11,6 +11,7 @@ import { User } from '@app/_models';
 export class AccountService {
     private userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
+    public users = {table:[]};
 
     constructor(
         private router: Router,
@@ -25,6 +26,11 @@ export class AccountService {
     }
 
     login(username, password) {
+        // add to json file
+        this.users.table.push({u: username, pw: password});
+        var json = JSON.stringify(this.users);
+        // SEND THIS TO BACKEND
+
         return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
