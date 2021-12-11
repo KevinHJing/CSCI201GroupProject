@@ -29,7 +29,7 @@ export class AccountService {
         // add to json file
         this.users.table.push({u: username, pw: password});
         var json = JSON.stringify(this.users);
-        // SEND THIS TO BACKEND
+        // TODO - SEND THIS TO BACKEND
 
         return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
             .pipe(map(user => {
