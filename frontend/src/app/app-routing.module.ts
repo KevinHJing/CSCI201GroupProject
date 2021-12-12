@@ -15,7 +15,7 @@ const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard] },
-    { path: 'register', component: RegisterComponent },
+    { path: 'signup', component: RegisterComponent },
     { path: 'account', loadChildren: accountModule },
 
     // otherwise redirect to home

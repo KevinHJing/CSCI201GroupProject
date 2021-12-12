@@ -11,7 +11,6 @@ import { User } from '@app/_models';
 export class AccountService {
     private userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
-    public users = {table:[]};
 
     constructor(
         private router: Router,
@@ -26,11 +25,7 @@ export class AccountService {
     }
 
     login(username, password) {
-        // add to json file
-        this.users.table.push({u: username, pw: password});
-        var json = JSON.stringify(this.users);
-        // TODO - SEND THIS TO BACKEND
-
+        // authenticate -- NEED BACKEND TO WRITE, not sure if it's /login or first /signup
         return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -48,9 +43,12 @@ export class AccountService {
     }
 
     register(user: User) {
+        // second signup in LoginController.java
         return this.http.post(`${environment.apiUrl}/users/register`, user);
     }
 
+// don't need anything under here
+    
     getAll() {
         return this.http.get<User[]>(`${environment.apiUrl}/users`);
     }
