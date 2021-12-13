@@ -1,5 +1,5 @@
 // package com.myfirsttest.testing.API;
-
+//
 // import com.google.gson.Gson;
 // import com.google.gson.GsonBuilder;
 // import java.io.IOException;
@@ -7,13 +7,13 @@
 // import java.net.http.HttpClient;
 // import java.net.http.HttpRequest;
 // import java.net.http.HttpResponse;
-
-
+//
+//
 // public class RapidAPI {
 //     public void APICall() throws IOException, InterruptedException {
 //         String uriBuilder = "https://realtymole-rental-estimate-v1.p.rapidapi.com/rentalPrice?";
 //         String uriBuilderEnd = "&latitude=34.0262912&longitude=-118.2859264";
-
+//
 //         // take in all the parameters decided by the user
 //         String propertyParam = "Apartment";
 //         propertyParam = "&" + propertyParam.replace(" ", "&");
