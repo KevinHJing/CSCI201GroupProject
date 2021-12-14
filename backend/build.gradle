@@ -15,15 +15,12 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'io.openliberty.features:beanValidation-2.0:21.0.0.11'
-<<<<<<< Updated upstream
-=======
 	implementation 'com.fasterxml.jackson.core:jackson-databind'
 	implementation 'com.fasterxml.jackson.core:jackson-annotations:2.9.0'
 	implementation 'io.vertx:vertx-core:3.5.3'
->>>>>>> Stashed changes
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 }

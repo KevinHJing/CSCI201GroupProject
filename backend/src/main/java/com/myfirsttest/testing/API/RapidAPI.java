@@ -1,7 +1,7 @@
 package com.myfirsttest.testing.API;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -24,8 +24,8 @@ public class RapidAPI {
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();
         HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        Gson gson = new GsonBuilder().create();
-        Data data = gson.fromJson(response.body(), Data.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        Data data = objectMapper.readValue(response.body(), Data.class);
         data.print();
     }
 }
