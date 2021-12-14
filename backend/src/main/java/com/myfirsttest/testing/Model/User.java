@@ -23,7 +23,7 @@ public class User {
     private String lname;
     private Integer age;
     private String driversLicense;
-    private List<String> likedListings;
+    private List<Listing> likedListings;
     //logged on
     private boolean enabled;
     @DBRef
@@ -80,7 +80,7 @@ public class User {
     public void setDriversLicense(String driversLicense) {this.driversLicense = driversLicense;}
     public void setFname(String fname) {this.fname = fname;}
     public void setLname(String lname) {this.lname = lname;}
-    public void setLikedListings(List<String> likedListings) {this.likedListings = likedListings;}
+    public void setLikedListings(List<Listing> likedListings) {this.likedListings = likedListings;}
     public String getEmail() {return email;}
     public String getId() {
         return id;
@@ -95,7 +95,8 @@ public class User {
     public String getDriversLicense() {return driversLicense;}
     public String getFname() {return fname;}
     public String getLname() {return lname;}
-    public List<String> getLikedListings() {return likedListings;}
+    public List<Listing> getLikedListings() {return likedListings;}
+    public void addFavListing(Listing listing){likedListings.add(listing);}
 }
 
 
