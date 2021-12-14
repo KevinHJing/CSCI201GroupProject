@@ -2,8 +2,8 @@ package com.myfirsttest.testing.Model;
 
 import org.springframework.data.annotation.Id;
 
-//@Entity
-//@Table(name="listing")
+@Entity
+@Table(name="listing")
 public class Listing {
     @Id
     private String ListingID;
