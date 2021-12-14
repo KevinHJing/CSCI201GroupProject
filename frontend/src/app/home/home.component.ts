@@ -16,23 +16,5 @@ export class HomeComponent {
     constructor(private accountService: AccountService, private http: HttpClient) {
         this.user = this.accountService.userValue;
     }
-
-    test(){
-        this.val = this.http.get<String>('localhost:8080/user/');
-        if (typeof this.val === 'string'){
-            alert("val is string");
-        }
-        if (typeof this.val === 'object'){
-            alert("val is object");
-        }
-        this.http.get<String>('localhost:8080/user/').subscribe(data => this.newVal = data);
-        if (typeof this.newVal === 'string'){
-            alert("newval is string");
-        }
-        else{
-            alert("newval not string");
-        }
-    }
-
     
 }

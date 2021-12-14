@@ -1,69 +1,74 @@
-//package com.myfirsttest.testing.Controller;
-//
-//import com.myfirsttest.testing.Model.User;
+package com.myfirsttest.testing.Controller;
+
+import com.myfirsttest.testing.Model.Credential;
+import com.myfirsttest.testing.Model.User;
 //import com.myfirsttest.testing.Service.CustomUserDetailsService;
-//import org.springframework.beans.factory.annotation.Autowired;
-////import org.springframework.security.core.Authentication;
-////import org.springframework.security.core.context.SecurityContextHolder;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.validation.BindingResult;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RequestMethod;
-//import org.springframework.web.servlet.ModelAndView;
-//import javax.validation.Valid;
-//
-//
-///*
-//!!
-//NEED HTML FOR EACH /***
-//!!
-// */
-//
-//@Controller
-//    public class LoginController {
-//        @Autowired
-//        private CustomUserDetailsService customUserDetailsService;
-//
-//        //view method for login page
-//        @RequestMapping(value = "/login", method = RequestMethod.GET)
-//        public ModelAndView login() {
-//            ModelAndView modelAndView = new ModelAndView();
-//            modelAndView.setViewName("login");
-//            return modelAndView;
-//        }
-//
-//        //view method for Register/signup page
-//        @RequestMapping(value = "/signup", method = RequestMethod.GET)
-//        public ModelAndView signup() {
-//            ModelAndView modelAndView = new ModelAndView();
-//            User user = new User();
-//            modelAndView.addObject("user", user);
-//            modelAndView.setViewName("signup");
-//            return modelAndView;
-//        }
-//
-//        //Save user when form is submitted
-//        @RequestMapping(value = "/signup", method = RequestMethod.POST)
-//        public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
-//            ModelAndView modelAndView = new ModelAndView();
-//            User userExists = customUserDetailsService.getUserByEmail(user.getEmail());
-//            if (userExists != null) {
-//                bindingResult
-//                        .rejectValue("email", "error.user",
-//                                "There is already a user registered with the email provided");
-//            }
-//            if (bindingResult.hasErrors()) {
-//                modelAndView.setViewName("signup");
-//            } else {
-//                customUserDetailsService.updateUser(user);
-//                modelAndView.addObject("successMessage", "User has been registered successfully");
-//                modelAndView.addObject("user", new User());
-//                modelAndView.setViewName("login");
-//
-//            }
-//            return modelAndView;
-//        }
-//
+import com.myfirsttest.testing.Repository.UserRepository;
+import com.myfirsttest.testing.Service.CustomUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.core.Authentication;
+//import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.swing.*;
+import javax.validation.Valid;
+import java.util.List;
+
+
+/*
+!!
+NEED HTML FOR EACH /***
+!!
+ */
+@RestController
+@RequestMapping("/login")
+@Controller
+    public class LoginController {
+        @Autowired
+        private CustomUserDetailsService customUserDetailsService;
+        private UserRepository uR;
+
+        // get list of all users
+        private List<User> users = customUserDetailsService.getAllUsers();
+
+        //view method for login page
+        @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+        public ResponseEntity<String> authenticate(@RequestBody Credential user) {
+            // find user
+            User test = uR.findByUserAndPass(user.getUsername(), user.getPassword());
+            // if not found say so
+            if (test == null){
+                return ResponseEntity.badRequest().body("Username or password is incorrect");
+            }
+            // if found, create token and return
+            String token = "jwt-token";
+            return ResponseEntity.ok(
+                    "id:" + test.getId()+
+                    "username:"+ test.getUsername()+
+                    "firstName:"+ test.getFname()+
+                    "lastName"+ test.getLname()+
+                    "token"+ token
+            );
+        }
+
+        //Save user when form is submitted
+        @RequestMapping(value = "/register", method = RequestMethod.POST)
+        public ResponseEntity<String> register(@Valid User user) {
+            User userExists = customUserDetailsService.findByUsername(user.getUsername());
+            if (userExists != null) {
+                return ResponseEntity.badRequest().body("Username \"" + user.getUsername() + "\" is already taken");
+            }
+            customUserDetailsService.updateUser(user);
+            return ResponseEntity.ok("Registration successful.");
+        }
+
 //        ///view method for user dashboard page which is a secure page
 //        //that will show data from the successful login.
 //        @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
@@ -76,43 +81,27 @@
 //            modelAndView.setViewName("dashboard");
 //            return modelAndView;
 //        }
-//
-//        //view method for initial page
-//        @RequestMapping(value = {"/","/home"}, method = RequestMethod.GET)
-//        public ModelAndView home() {
-//            ModelAndView modelAndView = new ModelAndView();
-//            modelAndView.setViewName("home");
-//            return modelAndView;
-//        }
-//
-//
-//        //used by user to perform normal user activities
-//        @RequestMapping(value = {"/userPage"}, method = RequestMethod.GET)
-//        public ModelAndView userPage() {
-//            ModelAndView model = new ModelAndView();
-//            model.setViewName("userPage");
-//            return model;
-//        }
-//}
-//
-//        /*
-//        @RequestMapping(value = "/loginPage", method = RequestMethod.GET)
-//        public ModelAndView loginPage(@RequestParam(value = "error",required = false) String error,
-//                                      @RequestParam(value = "logout",	required = false) String logout) {
-//
-//            ModelAndView model = new ModelAndView();
-//            if (error != null) {
-//                model.addObject("error", "Invalid Credentials provided.");
-//            }
-//
-//            if (logout != null) {
-//                model.addObject("message", "Logged out from JournalDEV successfully.");
-//            }
-//
-//            model.setViewName("loginPage");
-//            return model;
-//        }
-//         */
-//
-//
-//
+
+}
+
+        /*
+        @RequestMapping(value = "/loginPage", method = RequestMethod.GET)
+        public ModelAndView loginPage(@RequestParam(value = "error",required = false) String error,
+                                      @RequestParam(value = "logout",	required = false) String logout) {
+
+            ModelAndView model = new ModelAndView();
+            if (error != null) {
+                model.addObject("error", "Invalid Credentials provided.");
+            }
+
+            if (logout != null) {
+                model.addObject("message", "Logged out from JournalDEV successfully.");
+            }
+
+            model.setViewName("loginPage");
+            return model;
+        }
+         */
+
+
+
