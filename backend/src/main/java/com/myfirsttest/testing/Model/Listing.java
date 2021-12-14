@@ -45,6 +45,21 @@ public class Listing {
         this.sqFeet = sqFeet;
     }
 
+
+    public Listing(String id, String address, String state, String city, String zipcode, String formattedAddress, String formattedAddress1, String bedrooms, String bathrooms, String squareFootage) {
+        ListingID = id;
+        this.listingAddress = listingAddress;
+        State = state;
+        City = city;
+        Zip = Integer.parseInt(zipcode);
+        Street = formattedAddress;
+        Unit = formattedAddress1;
+        Beds = Integer.parseInt(bedrooms);
+        Baths = Integer.parseInt(bathrooms);
+        this.sqFeet = Integer.parseInt(squareFootage);
+    }
+
+
     public Integer getSqFeet() {
         return sqFeet;
     }

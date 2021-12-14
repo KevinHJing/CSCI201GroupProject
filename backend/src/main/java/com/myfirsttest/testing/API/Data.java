@@ -2,6 +2,7 @@ package com.myfirsttest.testing.API;
 
 import com.myfirsttest.testing.Model.Listing;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Data {
     private ArrayList<tempListing> listings;
@@ -17,5 +18,8 @@ public class Data {
             System.out.println(l.getBedrooms());
             System.out.println("");
         }
+    }
+    public ArrayList<tempListing> getListings(){
+        return listings;
     }
 }

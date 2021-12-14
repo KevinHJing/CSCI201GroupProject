@@ -1,5 +1,7 @@
 package com.myfirsttest.testing.API;
 
+import com.myfirsttest.testing.Model.Listing;
+
 public class tempListing {
     private String address;
     private String bathrooms;
@@ -32,6 +34,10 @@ public class tempListing {
         this.zipcode = zipcode;
         this.distance = distance;
         this.daysOld = daysOld;
+    }
+
+    public Listing toListing(String id){
+        return new Listing(id, address, state, city, zipcode, formattedAddress, formattedAddress, bedrooms, bathrooms, squareFootage);
     }
 
 

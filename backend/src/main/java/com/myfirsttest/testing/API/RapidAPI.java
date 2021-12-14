@@ -1,16 +1,18 @@
 package com.myfirsttest.testing.API;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.myfirsttest.testing.Model.Listing;
 
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
 
 
 public class RapidAPI {
-    public void APICall() throws IOException, InterruptedException {
+    public static List<tempListing> APICall() throws IOException, InterruptedException {
         String uriBuilder = "https://realtymole-rental-estimate-v1.p.rapidapi.com/rentalPrice?";
         String uriBuilderEnd = "&latitude=34.0262912&longitude=-118.2859264";
 
@@ -27,5 +29,6 @@ public class RapidAPI {
         ObjectMapper objectMapper = new ObjectMapper();
         Data data = objectMapper.readValue(response.body(), Data.class);
         data.print();
+        return data.getListings();
     }
 }
