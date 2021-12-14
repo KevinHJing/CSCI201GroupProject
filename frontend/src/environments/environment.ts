@@ -5,7 +5,7 @@
 export const environment = {
     production: false,
     // TODO -- CHANGE THIS PROBABLY
-    apiUrl: 'http://localhost:4000'
+    apiUrl: 'http://localhost:8080'
 };
 
 /*

@@ -29,6 +29,30 @@ public class User {
     @DBRef
     private Set<Role> roles;
 
+    public User(String username, String password, String email,
+                String fname, String lname, Integer age, String driversLicense) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.fname = fname;
+        this.lname = lname;
+        this.age = age;
+        this.driversLicense = driversLicense;
+        this.likedListings = null;
+    }
+
+    public User(){
+        this.username = "test";
+        this.password = "test";
+        this.email = "test";
+        this.fname = "test";
+        this.lname = "test";
+        this.age = 1;
+        this.driversLicense = "test";
+        this.likedListings = null;
+    }
+
+
     public boolean isEnabled() {
         return enabled;
     }
@@ -74,17 +98,7 @@ public class User {
     public List<String> getLikedListings() {return likedListings;}
 }
 
-/*
-public User(String username, String password, String email,
-                String fname, String lname, Integer age, String driversLicense) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.fname = fname;
-        this.lname = lname;
-        this.age = age;
-        this.driversLicense = driversLicense;
-        this.likedListings = null;
-    }
 
-    */
+
+
+
