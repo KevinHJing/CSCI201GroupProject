@@ -17,18 +17,6 @@ import java.util.List;
 public class UserController {
 
     private List<User> employees = createList();
-
-    @RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
-    public List<User> index(){
-//        System.out.println("worked");
-        return employees;
-    }
-
-    @GetMapping("/something")
-    public String index2(){
-        return "test\n";
-    }
-
     private static List<User> createList() {
         List<User> tempEmployees = new ArrayList<>();
         User emp1 = new User();
@@ -38,6 +26,20 @@ public class UserController {
         emp2.setLname("joe");
         return tempEmployees;
     }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
+    public String index(){
+//        System.out.println("worked");
+        return "hello";
+    }
+
+
+    @GetMapping("/something")
+    public String index2(){
+        return "test\n";
+    }
+
+
 
 //
 //    private final CustomUserDetailsService customUserDetailsService;
