@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
-import { User } from '@app/_models';
+import { Listing, User } from '@app/_models';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -26,7 +26,7 @@ export class AccountService {
 
     login(username, password) {
         // authenticate -- NEED BACKEND TO WRITE, not sure if it's /login or first /signup
-        return this.http.post<User>(`${environment.apiUrl}/login/authenticate`, { username, password })
+        return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));
@@ -44,43 +44,47 @@ export class AccountService {
 
     register(user: User) {
         // second signup in LoginController.java
-        return this.http.post(`${environment.apiUrl}/login/register`, user);
+        return this.http.post(`${environment.apiUrl}/users/register`, user);
     }
 
 // don't need anything under here
     
-    // getAll() {
-    //     return this.http.get<User[]>(`${environment.apiUrl}/users`);
-    // }
+    getAll() {
+        return this.http.get<User[]>(`${environment.apiUrl}/users`);
+    }
 
-    // getById(id: string) {
-    //     return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
-    // }
+    getById(id: string) {
+        return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
+    }
 
-    // update(id, params) {
-    //     return this.http.put(`${environment.apiUrl}/users/${id}`, params)
-    //         .pipe(map(x => {
-    //             // update stored user if the logged in user updated their own record
-    //             if (id == this.userValue.id) {
-    //                 // update local storage
-    //                 const user = { ...this.userValue, ...params };
-    //                 localStorage.setItem('user', JSON.stringify(user));
+    update(id, params) {
+        return this.http.put(`${environment.apiUrl}/users/${id}`, params)
+            .pipe(map(x => {
+                // update stored user if the logged in user updated their own record
+                if (id == this.userValue.id) {
+                    // update local storage
+                    const user = { ...this.userValue, ...params };
+                    localStorage.setItem('user', JSON.stringify(user));
 
-    //                 // publish updated user to subscribers
-    //                 this.userSubject.next(user);
-    //             }
-    //             return x;
-    //         }));
-    // }
+                    // publish updated user to subscribers
+                    this.userSubject.next(user);
+                }
+                return x;
+            }));
+    }
 
-    // delete(id: string) {
-    //     return this.http.delete(`${environment.apiUrl}/users/${id}`)
-    //         .pipe(map(x => {
-    //             // auto logout if the logged in user deleted their own record
-    //             if (id == this.userValue.id) {
-    //                 this.logout();
-    //             }
-    //             return x;
-    //         }));
-    // }
+    delete(id: string) {
+        return this.http.delete(`${environment.apiUrl}/users/${id}`)
+            .pipe(map(x => {
+                // auto logout if the logged in user deleted their own record
+                if (id == this.userValue.id) {
+                    this.logout();
+                }
+                return x;
+            }));
+    }
+
+    addFav(l: Listing){
+        this.userSubject.value.favs = l;
+    }
 }

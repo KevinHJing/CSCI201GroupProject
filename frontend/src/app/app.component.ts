@@ -22,7 +22,7 @@ export class AppComponent {
     login(){
         this.router.navigate(['login']);
     }
-    account(){
-        this.router.navigate(['account']);
+    favorites(){
+        this.router.navigate(['favorites']);
     }
 }

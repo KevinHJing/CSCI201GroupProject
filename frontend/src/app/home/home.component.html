@@ -1,7 +1,21 @@
 ﻿<div class="p-4">
     <div class="container">
         <h1>Home page</h1>
-        <p>insert list of houses here</p>
-        <a (click)="test()">Click</a>
     </div>
+    <table class="table table-striped">  
+        <thead>  
+            <tr>  
+              <th>Address</th>  
+              <th>Phone</th>  
+              <th *ngIf="user">Favorite</th>
+            </tr>  
+        </thead>  
+        <tbody>  
+          <tr *ngFor="let listing of data">  
+            <td>{{ listing.listingAddress }}</td>  
+            <td>{{ listing.listingPhone }}</td>  
+            <td *ngIf="user"><input (click)="checkedfunc(listing)" id="favChecked" type="checkbox"></td>
+            </tr>  
+        </tbody>  
+      </table>  
 </div>

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AccountRoutingModule } from './account/account-routing.module';
 import { LoginComponent } from './account/login.component';
 import { RegisterComponent } from './account/register.component';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 import { HomeComponent } from './home';
 import { AuthGuard } from './_helpers';
@@ -16,7 +17,7 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard] },
     { path: 'signup', component: RegisterComponent },
-    { path: 'account', loadChildren: accountModule },
+    { path: 'favorites', component: FavoritesComponent},
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

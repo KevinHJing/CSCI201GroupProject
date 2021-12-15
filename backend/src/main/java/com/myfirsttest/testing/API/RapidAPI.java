@@ -3,6 +3,7 @@ package com.myfirsttest.testing.API;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myfirsttest.testing.Model.Listing;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -28,7 +29,6 @@ public class RapidAPI {
         HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
         ObjectMapper objectMapper = new ObjectMapper();
         Data data = objectMapper.readValue(response.body(), Data.class);
-        data.print();
         return data.getListings();
     }
 }

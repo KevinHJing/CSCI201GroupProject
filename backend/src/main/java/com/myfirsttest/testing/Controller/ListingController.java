@@ -15,9 +15,9 @@ import java.util.List;
 @RequestMapping("/listing")
 public class ListingController {
 
-    @Autowired
+//    @Autowired
     private ListingRepository listingRepository;
-    @Autowired
+//    @Autowired
     private UserRepository userRepository;
 
     @GetMapping("/get-all")

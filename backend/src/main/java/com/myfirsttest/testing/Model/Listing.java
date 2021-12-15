@@ -59,6 +59,11 @@ public class Listing {
         this.sqFeet = Integer.parseInt(squareFootage);
     }
 
+    public Listing(){
+
+    }
+
+
 
     public Integer getSqFeet() {
         return sqFeet;

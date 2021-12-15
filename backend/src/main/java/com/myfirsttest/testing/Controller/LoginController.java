@@ -31,7 +31,7 @@ NEED HTML FOR EACH /***
 @RequestMapping("/login")
 @Controller
     public class LoginController {
-        @Autowired
+//        @Autowired
         private CustomUserDetailsService customUserDetailsService;
         private UserRepository uR;
 
