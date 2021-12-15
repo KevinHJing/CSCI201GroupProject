@@ -20,12 +20,12 @@ public class TestingApplication {
 		// start threads
 		apiThread rapidThread = new apiThread(1);
 		// once other API is implemented
-//		apiThread otherThread = new apiThread(2);
+		apiThread otherThread = new apiThread(2);
 
 		ExecutorService exec = Executors.newCachedThreadPool();
 
 		exec.execute(rapidThread);
-//		exec.execute(otherThread);
+		exec.execute(otherThread);
 
 		exec.shutdown();
 

@@ -1,5 +1,6 @@
 package com.myfirsttest.testing;
 
+import com.myfirsttest.testing.API.AttomAPI;
 import com.myfirsttest.testing.API.RapidAPI;
 import com.myfirsttest.testing.API.tempListing;
 
@@ -24,6 +25,26 @@ public class apiThread extends Thread{
             List<tempListing> data = new ArrayList();
             try {
                 data = RapidAPI.APICall();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            // write to file
+            try {
+                PrintWriter writer = new PrintWriter(new FileWriter("listings1.txt"));
+                for (tempListing log: data) {
+                    writer.print(log);
+                    writer.println();
+                }
+                writer.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (id == 2){
+            // call api
+            List<tempListing> data = new ArrayList();
+            try {
+                data = AttomAPI.APICall();
             } catch (Exception e) {
                 e.printStackTrace();
             }
