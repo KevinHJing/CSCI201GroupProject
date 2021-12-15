@@ -24,7 +24,7 @@ export class HomeComponent {
 
 
     checkedfunc(l: Listing){
-        alert(l.listingAddress);
+        // alert(l.listingAddress);
         this.accountService.update(this.user.id, {favs: l}).pipe(first())
         .subscribe(
             data => {
