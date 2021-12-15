@@ -25,8 +25,8 @@ export class AccountService {
     }
 
     login(username, password) {
-        // authenticate -- NEED BACKEND TO WRITE, not sure if it's /login or first /signup
-        return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
+        // authenticate 
+        return this.http.post<User>(`${environment.apiUrl}/login/authenticate`, { username, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));
@@ -44,7 +44,7 @@ export class AccountService {
 
     register(user: User) {
         // second signup in LoginController.java
-        return this.http.post(`${environment.apiUrl}/users/register`, user);
+        return this.http.post(`${environment.apiUrl}/login/register`, user);
     }
 
 // don't need anything under here
